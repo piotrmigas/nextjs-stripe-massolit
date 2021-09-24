@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://massolit.vercel.app</loc>
+    </url>
+    <url>
+        <loc>https://massolit.vercel.app/cart</loc>
+    </url>
+     <url>
+        <loc>https://massolit.vercel.app/checkout</loc>
+    </url>
+     <url>
+        <loc>https://massolit.vercel.app/success</loc>
+    </url>
+     <url>
+        <loc>https://massolit.vercel.app/canceled</loc>
+    </url>
+     <url>
+        <loc>https://massolit.vercel.app/signup</loc>
+    </url>
+    <url>
+        <loc>https://massolit.vercel.app/signin</loc>
+    </url>
+</urlset>
