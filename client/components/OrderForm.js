@@ -28,6 +28,7 @@ const OrderForm = ({ setOrderDetails }) => {
                 {...register("phone", { required: true })}
                 placeholder="Telefon"
                 className={`input ${formState.errors.phone && "is-danger"}`}
+                min="0"
               />
               <span className="icon is-small is-left">
                 <i className="fas fa-phone" />
