@@ -1,10 +1,16 @@
-import { useState, useEffect, useContext } from "react";
-import { useRouter } from "next/router";
-import { CardNumberElement, CardExpiryElement, CardCvcElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import { fetchFromAPI } from "../helpers";
-import { UserContext } from "../context/UserContext";
+import { useState, useEffect, useContext, ChangeEvent } from 'react';
+import { useRouter } from 'next/router';
+import { CardNumberElement, CardExpiryElement, CardCvcElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { fetchFromAPI } from '../helpers';
+import { UserContext } from '../context/UserContext';
+import { CartItem, Order } from '../types';
 
-const CustomCheckout = ({ cartItems, orderDetails }) => {
+type CustomCheckoutProps = {
+  cartItems: CartItem[];
+  orderDetails: Order;
+};
+
+const CustomCheckout = ({ cartItems, orderDetails }: CustomCheckoutProps) => {
   const router = useRouter();
   const { user } = useContext(UserContext);
   const [processing, setProcessing] = useState(false);
@@ -35,13 +41,13 @@ const CustomCheckout = ({ cartItems, orderDetails }) => {
         receipt_email: user.email,
         metadata: {
           uid: user.id,
-          products: cartItems.map((item) => item.title).join(", "),
+          products: cartItems.map((item) => item.title).join(', '),
           pickupDate: orderDetails.pickupDate,
         },
       };
 
       const customCheckout = async () => {
-        const { id } = await fetchFromAPI("create-payment-intent", { body });
+        const { id } = await fetchFromAPI('create-payment-intent', { body });
 
         setPaymentIntentId(id);
       };
@@ -52,9 +58,9 @@ const CustomCheckout = ({ cartItems, orderDetails }) => {
 
   const handleCheckout = async () => {
     setProcessing(true);
-    const { clientSecret } = await fetchFromAPI("update-payment-intent", {
+    const { clientSecret } = await fetchFromAPI('update-payment-intent', {
       body: { paymentIntentId },
-      method: "PUT",
+      method: 'PUT',
     });
 
     const payload = await stripe.confirmCardPayment(clientSecret, {
@@ -65,27 +71,27 @@ const CustomCheckout = ({ cartItems, orderDetails }) => {
       setError(`Payment Failed: ${payload.error.message}`);
       setProcessing(false);
     } else {
-      router.push("/success");
+      router.push('/success');
     }
   };
 
   const handleCardChange = (e) => {
     const { error } = e;
-    setError(error ? error.message : "");
+    setError(error ? error.message : '');
     setCardComplete({ ...cardComplete, [e.elementType]: e.complete });
   };
 
   const cardStyle = {
     style: {
       base: {
-        fontSize: "16px",
-        textAlign: "center",
-        "::placeholder": {
-          color: "#4a4a4a",
+        fontSize: '16px',
+        textAlign: 'center',
+        '::placeholder': {
+          color: '#4a4a4a',
         },
       },
       invalid: {
-        color: "red",
+        color: 'red',
       },
     },
   };
@@ -93,26 +99,26 @@ const CustomCheckout = ({ cartItems, orderDetails }) => {
   const { cardNumber, cardExpiry, cardCvc } = cardComplete;
 
   return (
-    <div className="columns is-centered has-text-centered mt-6">
-      <div className="column is-one-third">
-        <h5 className="title is-5">Płatność kartą</h5>
-        <div className="stripe-card">
-          <CardNumberElement className="card-element" options={cardStyle} onChange={handleCardChange} />
+    <div className='columns is-centered has-text-centered mt-6'>
+      <div className='column is-one-third'>
+        <h5 className='title is-5'>Płatność kartą</h5>
+        <div className='stripe-card'>
+          <CardNumberElement className='card-element' options={cardStyle} onChange={handleCardChange} />
         </div>
-        <div className="stripe-card">
-          <CardExpiryElement className="card-element" options={cardStyle} onChange={handleCardChange} />
+        <div className='stripe-card'>
+          <CardExpiryElement className='card-element' options={cardStyle} onChange={handleCardChange} />
         </div>
-        <div className="stripe-card">
-          <CardCvcElement className="card-element" options={cardStyle} onChange={handleCardChange} />
+        <div className='stripe-card'>
+          <CardCvcElement className='card-element' options={cardStyle} onChange={handleCardChange} />
         </div>
         <button
           disabled={processing || !cardNumber || !cardExpiry || !cardCvc}
-          className={`button is-black ${processing && "is-loading"}`}
+          className={`button is-black ${processing && 'is-loading'}`}
           onClick={() => handleCheckout()}
         >
           Zapłać
         </button>
-        {error && <p className="error-message mt-4">{error}</p>}
+        {error && <p className='error-message mt-4'>{error}</p>}
       </div>
     </div>
   );

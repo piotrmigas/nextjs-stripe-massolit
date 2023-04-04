@@ -1,12 +1,12 @@
 const storeCartItems = (cartItems) => {
   const cart = cartItems.length > 0 ? cartItems : [];
-  typeof window !== "undefined" && localStorage.setItem("cart", JSON.stringify(cart));
+  typeof window !== 'undefined' && localStorage.setItem('cart', JSON.stringify(cart));
 };
 
 export const sumItems = (cartItems) => {
   storeCartItems(cartItems);
-  const cookies = cartItems.filter((item) => item.category === "cookies");
-  const otherItems = cartItems.filter((item) => item.category !== "cookies");
+  const cookies = cartItems.filter((item) => item.category === 'cookies');
+  const otherItems = cartItems.filter((item) => item.category !== 'cookies');
 
   let discount;
 
@@ -29,7 +29,7 @@ export const sumItems = (cartItems) => {
 
 const cartReducer = (state, action) => {
   switch (action.type) {
-    case "ADD_ITEM":
+    case 'ADD_ITEM':
       if (!state.cartItems.find((item) => item.id === action.payload.id)) {
         state.cartItems.push({
           ...action.payload,
@@ -42,7 +42,7 @@ const cartReducer = (state, action) => {
         cartItems: [...state.cartItems],
         ...sumItems(state.cartItems),
       };
-    case "INCREASE":
+    case 'INCREASE':
       const increaseIndex = state.cartItems.findIndex((item) => item.id === action.payload.id);
       state.cartItems[increaseIndex].quantity++;
 
@@ -51,7 +51,7 @@ const cartReducer = (state, action) => {
         cartItems: [...state.cartItems],
         ...sumItems(state.cartItems),
       };
-    case "DECREASE":
+    case 'DECREASE':
       const decreaseIndex = state.cartItems.findIndex((item) => item.id === action.payload.id);
       const product = state.cartItems[decreaseIndex];
 
@@ -64,15 +64,15 @@ const cartReducer = (state, action) => {
         cartItems: [...state.cartItems],
         ...sumItems(state.cartItems),
       };
-    case "REMOVE_ITEM":
+    case 'REMOVE_ITEM':
       const newCartItems = state.cartItems.filter((item) => item.id !== action.payload.id);
       return {
         ...state,
         cartItems: [...newCartItems],
         ...sumItems(newCartItems),
       };
-    case "CLEAR":
-      localStorage.removeItem("cart");
+    case 'CLEAR':
+      localStorage.removeItem('cart');
       return {
         cartItems: [],
         itemCount: 0,

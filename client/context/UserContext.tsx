@@ -1,16 +1,16 @@
-import { useEffect, createContext, useState } from "react";
-import { auth, createUserProfileDocument } from "../firebase";
+import { useEffect, createContext, useState, ReactNode } from 'react';
+import { auth, createUserProfileDocument } from '../firebase';
 
-export const UserContext = createContext();
+export const UserContext = createContext(null);
 
-const UserContextProvider = ({ children }) => {
+const UserContextProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
+        const userRef = await createUserProfileDocument(userAuth, null);
 
         userRef.onSnapshot((snapShot) => {
           setUser({

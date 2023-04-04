@@ -1,8 +1,12 @@
-import { useContext } from "react";
-import { ProductsContext } from "../../context/ProductsContext";
-import Product from "./Product";
+import { useContext } from 'react';
+import { ProductsContext } from '../../context/ProductsContext';
+import Product from './Product';
 
-const MenuItems = ({ category }) => {
+type Props = {
+  category: string;
+};
+
+const MenuItems = ({ category }: Props) => {
   const { products } = useContext(ProductsContext);
 
   return (
@@ -10,7 +14,7 @@ const MenuItems = ({ category }) => {
       {products
         .filter((product) => product.category === category)
         .map((product) => (
-          <div className="column is-half" key={product.id}>
+          <div className='column is-half' key={product.id}>
             <Product {...product} key={product.id} />
           </div>
         ))}
