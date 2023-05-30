@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 
 type LayoutProps = {
-  children: ReactNode;
+  children?: ReactNode;
   title: string;
 };
 

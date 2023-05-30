@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, ChangeEvent } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
 import { CardNumberElement, CardExpiryElement, CardCvcElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { fetchFromAPI } from '../helpers';

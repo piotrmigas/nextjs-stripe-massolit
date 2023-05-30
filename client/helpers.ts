@@ -4,7 +4,7 @@ export const isInCart = (product, cartItems) => {
   return cartItems.find((item) => item.id === product.id);
 };
 
-const API = 'http://localhost:3001';
+const API = 'https://massolit-nodejs.vercel.app';
 
 export async function fetchFromAPI(endpoint: string, opts) {
   const { method, body }: { method: string; body: object } = { method: 'POST', body: null, ...opts };
