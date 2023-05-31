@@ -9,7 +9,7 @@ import Menu from '../components/Menu/Menu';
 export default function Home() {
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-      <ToastContainer hideProgressBar />
+      <ToastContainer hideProgressBar className='customToast' />
       <Layout title='Massolit Books &amp; Bakery'>
         <Hero />
         <Info />
