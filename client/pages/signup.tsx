@@ -23,11 +23,11 @@ const SignUp = () => {
   };
 
   return (
-    <Layout title='Zapisz się'>
+    <Layout title='Rejestracja'>
       <div className='container'>
         <div className='columns is-centered has-text-centered mt-6'>
           <div className='column is-one-third'>
-            <h4 className='title is-4'>Zapisz się</h4>
+            <h4 className='title is-4'>Rejestracja</h4>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className='field'>
                 <p className='control has-icons-left'>
@@ -74,7 +74,7 @@ const SignUp = () => {
               <div className='field'>
                 <p className='control'>
                   <button type='submit' className='button is-black mt-2'>
-                    Zapisz
+                    Utwórz konto
                   </button>
                 </p>
               </div>

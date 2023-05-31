@@ -66,7 +66,7 @@ const SignIn = () => {
               </div>
               Nie masz konta?{' '}
               <Link href='/signup'>
-                <a>Zapisz się</a>
+                <a>Zarejestruj się</a>
               </Link>
               <div className='error-message mt-2'>{error && <p>{error.message}</p>}</div>
             </form>

@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { isInCart } from '../../helpers';
 import { CartContext } from '../../context/CartContext';
 import { Product } from '../../types';
+import { toast } from 'react-toastify';
 
 const Product = ({ title, price, id, description, category }: Product) => {
   const { addProduct, cartItems, increase } = useContext(CartContext);
@@ -20,7 +21,13 @@ const Product = ({ title, price, id, description, category }: Product) => {
           <p className='title is-6 price'>{price}zł</p>
         </div>
         <div className='column'>
-          <button className='button add-btn' onClick={() => (!itemInCart ? addProduct(product) : increase(product))}>
+          <button
+            className='button add-btn'
+            onClick={() => {
+              !itemInCart ? addProduct(product) : increase(product);
+              toast.success('Produkt został dodany do koszyka!');
+            }}
+          >
             Dodaj
           </button>
         </div>
