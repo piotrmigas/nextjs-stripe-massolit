@@ -52,7 +52,7 @@ const OrderForm = ({ setOrderDetails }: OrderFormProps) => {
                 <i className='fas fa-phone' />
               </span>
             </div>
-            {errors.phone && <p className='help is-danger'>Błędny numer telefonu</p>}
+            {errors.phone && <p className='help is-danger'>{errors.phone.message as string}</p>}
           </div>
         </div>
       </div>
