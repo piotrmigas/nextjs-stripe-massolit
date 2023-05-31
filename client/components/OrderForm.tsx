@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { UserContext } from '../context/UserContext';
 import { Order } from '../types';
 
@@ -7,11 +7,16 @@ type OrderFormProps = {
   setOrderDetails: (value: Order) => void;
 };
 
+const PHONE_REGEX = new RegExp(/^(?:0\.(?:0[0-9]|[0-9]\d?)|[0-9]\d*(?:\.\d{1,2})?)(?:e[+-]?\d+)?$/);
+
 const OrderForm = ({ setOrderDetails }: OrderFormProps) => {
   const { user } = useContext(UserContext);
-  const { register, handleSubmit, formState } = useForm({
-    mode: 'onChange',
-  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    control,
+  } = useForm();
 
   const onSubmit = ({
     phone,
@@ -22,7 +27,18 @@ const OrderForm = ({ setOrderDetails }: OrderFormProps) => {
     pickupDate: string;
     pickupAddress: string;
   }) => {
-    setOrderDetails({ phone, pickupDate, pickupAddress });
+    console.log(phone, pickupDate);
+
+    // setOrderDetails({ phone, pickupDate, pickupAddress });
+  };
+
+  const handleValidate = (phoneNumber: string) => {
+    if (PHONE_REGEX.test(phoneNumber)) {
+      errors['phoneNumber'] = null;
+    } else {
+      errors['phoneNumber'] = 'Błędny numer telefonu';
+    }
+    return PHONE_REGEX.test(phoneNumber);
   };
 
   return (
@@ -33,20 +49,29 @@ const OrderForm = ({ setOrderDetails }: OrderFormProps) => {
           <p className='title is-6'>
             Imię i nazwisko: <span className='has-text-weight-normal'>{user.displayName}</span>
           </p>
-
           <div className='field'>
-            <p className='control has-icons-left'>
-              <input
-                type='number'
-                {...register('phone', { required: true })}
-                placeholder='Telefon'
-                className={`input ${formState.errors.phone && 'is-danger'}`}
-                min='0'
+            <div className='control has-icons-left'>
+              <Controller
+                defaultValue={''}
+                name='phone'
+                control={control}
+                rules={{
+                  validate: (value) => handleValidate(value),
+                }}
+                render={({ field: { onChange, value } }) => (
+                  <input
+                    placeholder='Telefon'
+                    className={`input ${errors.phone && 'is-danger'}`}
+                    value={value}
+                    onChange={onChange}
+                  />
+                )}
               />
               <span className='icon is-small is-left'>
                 <i className='fas fa-phone' />
               </span>
-            </p>
+            </div>
+            {errors.phone && <p className='help is-danger'>Błędny numer telefonu</p>}
           </div>
         </div>
       </div>
@@ -59,23 +84,23 @@ const OrderForm = ({ setOrderDetails }: OrderFormProps) => {
         <div className='column is-one-quarter'>
           <div className='field pb-2'>
             <label className='label'>Czas odbioru:</label>
-            <p className='control has-icons-left'>
-              <span className={`select ${formState.errors.pickupDate && 'is-danger'}`}>
+            <div className='control has-icons-left'>
+              <span className={`select ${errors.pickupDate && 'is-danger'}`}>
                 <select {...register('pickupDate', { required: true })}>
                   <option value=''>Wybierz...</option>
                   <option value='Piątek, 02.IV / Friday, April 2nd'>Piątek, 02.IV / Friday, April 2nd</option>
                   <option value='Sobota, 03.IV / Saturday, April 3nd'>Sobota, 03.IV / Saturday, April 3nd</option>
                 </select>
+                <span className='icon is-small is-left'>
+                  <i className='far fa-calendar-alt' />
+                </span>
               </span>
-              <span className='icon is-small is-left'>
-                <i className='far fa-calendar-alt' />
-              </span>
-            </p>
+            </div>
           </div>
           <div className='field'>
             <label className='label'>Odbiór w sklepie:</label>
-            <p className='control has-icons-left mb-5'>
-              <span className={`select ${formState.errors.pickupAddress && 'is-danger'}`}>
+            <div className='control has-icons-left mb-5'>
+              <span className={`select ${errors.pickupAddress && 'is-danger'}`}>
                 <select {...register('pickupAddress', { required: true })}>
                   <option value=''>Wybierz...</option>
                   <option value='Massolit Bakery - ul.Smoleńsk 17'>Massolit Bakery - ul.Smoleńsk 17</option>
@@ -83,11 +108,11 @@ const OrderForm = ({ setOrderDetails }: OrderFormProps) => {
                     Massolit Bakes (Podgórze) - ul.Targowa 3
                   </option>
                 </select>
+                <span className='icon is-small is-left'>
+                  <i className='fas fa-shopping-bag' />
+                </span>
               </span>
-              <span className='icon is-small is-left'>
-                <i className='fas fa-shopping-bag' />
-              </span>
-            </p>
+            </div>
           </div>
           <button type='submit' className='button is-black mt-2 mb-6'>
             Kontynuuj
