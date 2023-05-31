@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { UserContext } from '../context/UserContext';
 import { Order } from '../types';
 
@@ -7,18 +7,15 @@ type OrderFormProps = {
   setOrderDetails: (value: Order) => void;
 };
 
-const PHONE_REGEX = new RegExp(/^(?:0\.(?:0[0-9]|[0-9]\d?)|[0-9]\d*(?:\.\d{1,2})?)(?:e[+-]?\d+)?$/);
-
 const OrderForm = ({ setOrderDetails }: OrderFormProps) => {
   const { user } = useContext(UserContext);
   const {
     register,
     handleSubmit,
     formState: { errors },
-    control,
-  } = useForm();
+  } = useForm({ mode: 'onChange' });
 
-  const onSubmit = ({
+  const onSubmit: SubmitHandler<FieldValues> = ({
     phone,
     pickupDate,
     pickupAddress,
@@ -27,18 +24,7 @@ const OrderForm = ({ setOrderDetails }: OrderFormProps) => {
     pickupDate: string;
     pickupAddress: string;
   }) => {
-    console.log(phone, pickupDate);
-
-    // setOrderDetails({ phone, pickupDate, pickupAddress });
-  };
-
-  const handleValidate = (phoneNumber: string) => {
-    if (PHONE_REGEX.test(phoneNumber)) {
-      errors['phoneNumber'] = null;
-    } else {
-      errors['phoneNumber'] = 'Błędny numer telefonu';
-    }
-    return PHONE_REGEX.test(phoneNumber);
+    setOrderDetails({ phone, pickupDate, pickupAddress });
   };
 
   return (
@@ -51,21 +37,16 @@ const OrderForm = ({ setOrderDetails }: OrderFormProps) => {
           </p>
           <div className='field'>
             <div className='control has-icons-left'>
-              <Controller
-                defaultValue={''}
-                name='phone'
-                control={control}
-                rules={{
-                  validate: (value) => handleValidate(value),
-                }}
-                render={({ field: { onChange, value } }) => (
-                  <input
-                    placeholder='Telefon'
-                    className={`input ${errors.phone && 'is-danger'}`}
-                    value={value}
-                    onChange={onChange}
-                  />
-                )}
+              <input
+                {...register('phone', {
+                  required: true,
+                  pattern: {
+                    value: /^(?:0\.(?:0[0-9]|[0-9]\d?)|[0-9]\d*(?:\.\d{1,2})?)(?:e[+-]?\d+)?$/,
+                    message: 'Nieprawidłowy format numeru telefonu',
+                  },
+                })}
+                placeholder='Telefon'
+                className={`input ${errors.phone && 'is-danger'}`}
               />
               <span className='icon is-small is-left'>
                 <i className='fas fa-phone' />
