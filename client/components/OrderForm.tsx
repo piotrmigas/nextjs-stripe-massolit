@@ -29,8 +29,8 @@ const OrderForm = ({ setOrderDetails }: OrderFormProps) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className='columns is-centered has-text-centered pt-3'>
-        <div className='column is-one-quarter'>
+      <div className='columns is-centered has-text-centered pt-3 is-mobile'>
+        <div className='column column is-two-fifths-mobile is-one-third-tablet is-one-quarter-desktop'>
           <p className='title is-5'>Zamówienie</p>
           <p className='title is-6'>
             Imię i nazwisko: <span className='has-text-weight-normal'>{user.displayName}</span>
@@ -63,7 +63,7 @@ const OrderForm = ({ setOrderDetails }: OrderFormProps) => {
       </div>
       <div className='columns is-centered has-text-centered'>
         <div className='column is-one-quarter'>
-          <div className='field pb-2'>
+          <div className='field mb-5'>
             <label className='label'>Czas odbioru:</label>
             <div className='control has-icons-left'>
               <span className={`select ${errors.pickupDate && 'is-danger'}`}>
