@@ -3,14 +3,13 @@ import { useRouter } from 'next/router';
 import { CardNumberElement, CardExpiryElement, CardCvcElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { fetchFromAPI } from '../helpers';
 import { UserContext } from '../context/UserContext';
-import { CartItem, Order } from '../types';
 
-type CustomCheckoutProps = {
+type Props = {
   cartItems: CartItem[];
   orderDetails: Order;
 };
 
-const CustomCheckout = ({ cartItems, orderDetails }: CustomCheckoutProps) => {
+const CustomCheckout = ({ cartItems, orderDetails }: Props) => {
   const router = useRouter();
   const { user } = useContext(UserContext);
   const [processing, setProcessing] = useState(false);

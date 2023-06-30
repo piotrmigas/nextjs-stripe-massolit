@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { isInCart } from '../../helpers';
 import { CartContext } from '../../context/CartContext';
-import { Product } from '../../types';
 import { toast } from 'react-toastify';
 
 const Product = ({ title, price, id, description, category }: Product) => {

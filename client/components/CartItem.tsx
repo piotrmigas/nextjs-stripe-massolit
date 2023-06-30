@@ -1,4 +1,3 @@
-import { CartItem } from '../types';
 import { PlusCircleIcon, MinusCircleIcon, TrashIcon } from './Icons';
 
 type Props = CartItem & {

@@ -3,7 +3,6 @@ import { CartContext } from '../context/CartContext';
 import Layout from '../components/Layout';
 import OrderForm from '../components/OrderForm';
 import CustomCheckout from '../components/CustomCheckout';
-import { Order } from '../types';
 
 const Checkout = () => {
   const { cartItems } = useContext(CartContext);

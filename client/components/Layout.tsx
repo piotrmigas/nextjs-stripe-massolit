@@ -4,12 +4,12 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 
-type LayoutProps = {
+type Props = {
   children?: ReactNode;
   title: string;
 };
 
-const Layout = ({ children, title }: LayoutProps) => {
+const Layout = ({ children, title }: Props) => {
   const router = useRouter();
 
   return (

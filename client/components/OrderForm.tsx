@@ -1,13 +1,12 @@
 import { useContext } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { UserContext } from '../context/UserContext';
-import { Order } from '../types';
 
-type OrderFormProps = {
+type Props = {
   setOrderDetails: (value: Order) => void;
 };
 
-const OrderForm = ({ setOrderDetails }: OrderFormProps) => {
+const OrderForm = ({ setOrderDetails }: Props) => {
   const { user } = useContext(UserContext);
   const {
     register,

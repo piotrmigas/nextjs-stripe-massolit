@@ -1,6 +1,5 @@
 import { ReactNode, createContext, useReducer } from 'react';
 import cartReducer, { sumItems } from './cartReducer';
-import { CartItem } from '../types';
 
 export const CartContext = createContext(null);
 
