@@ -50,7 +50,7 @@ const OrderForm = ({ setOrderDetails }: Props) => {
                 placeholder='Telefon'
                 className={`input ${errors.phone && 'is-danger'}`}
               />
-              <span className='icon is-small is-left'>
+              <span className='icon is-left'>
                 <FontAwesomeIcon icon={faPhone} />
               </span>
             </div>
@@ -74,7 +74,7 @@ const OrderForm = ({ setOrderDetails }: Props) => {
                   <option value='Piątek, 02.IV / Friday, April 2nd'>Piątek, 02.IV / Friday, April 2nd</option>
                   <option value='Sobota, 03.IV / Saturday, April 3nd'>Sobota, 03.IV / Saturday, April 3nd</option>
                 </select>
-                <span className='icon is-small is-left'>
+                <span className='icon is-left'>
                   <FontAwesomeIcon icon={faCalendarAlt} />
                 </span>
               </span>
@@ -91,7 +91,7 @@ const OrderForm = ({ setOrderDetails }: Props) => {
                     Massolit Bakes (Podgórze) - ul.Targowa 3
                   </option>
                 </select>
-                <span className='icon is-small is-left'>
+                <span className='icon is-left'>
                   <FontAwesomeIcon icon={faShoppingBag} />
                 </span>
               </span>

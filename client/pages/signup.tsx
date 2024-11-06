@@ -40,7 +40,7 @@ const SignUp = () => {
                     className={`input ${formState.errors.name && 'is-danger'}`}
                     placeholder='Imię i nazwisko'
                   />
-                  <span className='icon is-small is-left'>
+                  <span className='icon is-left'>
                     <FontAwesomeIcon icon={faUser} />
                   </span>
                 </p>
@@ -55,7 +55,7 @@ const SignUp = () => {
                     className={`input ${formState.errors.email && 'is-danger'}`}
                     placeholder='Email'
                   />
-                  <span className='icon is-small is-left'>
+                  <span className='icon is-left'>
                     <FontAwesomeIcon icon={faEnvelope} />
                   </span>
                 </p>
@@ -68,7 +68,7 @@ const SignUp = () => {
                     type='password'
                     placeholder='Hasło'
                   />
-                  <span className='icon is-small is-left'>
+                  <span className='icon is-left'>
                     <FontAwesomeIcon icon={faLock} />
                   </span>
                 </p>

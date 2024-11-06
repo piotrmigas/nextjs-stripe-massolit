@@ -54,7 +54,7 @@ const SignIn = () => {
                     type='password'
                     placeholder='Hasło'
                   />
-                  <span className='icon is-small is-left'>
+                  <span className='icon is-left'>
                     <FontAwesomeIcon icon={faLock} />
                   </span>
                 </p>
