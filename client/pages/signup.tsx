@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import Layout from '../components/Layout';
 import { auth, createUserProfileDocument } from '../firebase';
 
@@ -39,7 +41,7 @@ const SignUp = () => {
                     placeholder='Imię i nazwisko'
                   />
                   <span className='icon is-small is-left'>
-                    <i className='fas fa-user' />
+                    <FontAwesomeIcon icon={faUser} />
                   </span>
                 </p>
               </div>
@@ -54,7 +56,7 @@ const SignUp = () => {
                     placeholder='Email'
                   />
                   <span className='icon is-small is-left'>
-                    <i className='fas fa-envelope' />
+                    <FontAwesomeIcon icon={faEnvelope} />
                   </span>
                 </p>
               </div>
@@ -67,7 +69,7 @@ const SignUp = () => {
                     placeholder='Hasło'
                   />
                   <span className='icon is-small is-left'>
-                    <i className='fas fa-lock' />
+                    <FontAwesomeIcon icon={faLock} />
                   </span>
                 </p>
               </div>

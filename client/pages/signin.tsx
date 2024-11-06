@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Layout from '../components/Layout';
 import { useForm } from 'react-hook-form';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import { auth } from '../firebase';
 
 const SignIn = () => {
@@ -39,8 +41,8 @@ const SignIn = () => {
                     className={`input ${formState.errors.email && 'is-danger'}`}
                     placeholder='Email'
                   />
-                  <span className='icon is-small is-left'>
-                    <i className='fas fa-envelope' />
+                  <span className='icon is-left'>
+                    <FontAwesomeIcon icon={faEnvelope} />
                   </span>
                 </p>
               </div>
@@ -53,7 +55,7 @@ const SignIn = () => {
                     placeholder='Hasło'
                   />
                   <span className='icon is-small is-left'>
-                    <i className='fas fa-lock' />
+                    <FontAwesomeIcon icon={faLock} />
                   </span>
                 </p>
               </div>

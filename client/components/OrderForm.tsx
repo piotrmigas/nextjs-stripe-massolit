@@ -1,6 +1,9 @@
 import { useContext } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { UserContext } from '../context/UserContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPhone, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
 
 type Props = {
   setOrderDetails: (value: Order) => void;
@@ -48,7 +51,7 @@ const OrderForm = ({ setOrderDetails }: Props) => {
                 className={`input ${errors.phone && 'is-danger'}`}
               />
               <span className='icon is-small is-left'>
-                <i className='fas fa-phone' />
+                <FontAwesomeIcon icon={faPhone} />
               </span>
             </div>
             {errors.phone && <p className='help is-danger'>{errors.phone.message as string}</p>}
@@ -72,7 +75,7 @@ const OrderForm = ({ setOrderDetails }: Props) => {
                   <option value='Sobota, 03.IV / Saturday, April 3nd'>Sobota, 03.IV / Saturday, April 3nd</option>
                 </select>
                 <span className='icon is-small is-left'>
-                  <i className='far fa-calendar-alt' />
+                  <FontAwesomeIcon icon={faCalendarAlt} />
                 </span>
               </span>
             </div>
@@ -89,7 +92,7 @@ const OrderForm = ({ setOrderDetails }: Props) => {
                   </option>
                 </select>
                 <span className='icon is-small is-left'>
-                  <i className='fas fa-shopping-bag' />
+                  <FontAwesomeIcon icon={faShoppingBag} />
                 </span>
               </span>
             </div>
